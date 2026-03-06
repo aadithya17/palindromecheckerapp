@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class palindromecheckerapp {
 
@@ -9,25 +12,27 @@ public class palindromecheckerapp {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Convert string to character array
-        char[] arr = input.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        int start = 0;
-        int end = arr.length - 1;
+        // Enqueue and Push characters
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            stack.push(ch);     // LIFO
+            queue.add(ch);      // FIFO
+        }
 
         boolean isPalindrome = true;
 
-        // Two-pointer approach
-        while (start < end) {
-            if (arr[start] != arr[end]) {
+        // Compare dequeue vs pop
+        while (!stack.isEmpty()) {
+            if (stack.pop() != queue.remove()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Display result
+        // Print result
         if (isPalindrome) {
             System.out.println("The string is a Palindrome");
         } else {
@@ -36,4 +41,4 @@ public class palindromecheckerapp {
 
         scanner.close();
     }
-}
+}git
